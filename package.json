@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "alfresco-js-api": "^3.0.0-14a975b4461542cd2e108addd613a813313d32e8"
+  }
+}
