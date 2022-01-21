@@ -1,3 +1,5 @@
 Following tutorial:
 
 https://www.alfresco.com/abn/adf/docs/tutorials/creating-javascript-app-using-alfresco-js-api/
+
+-- watch out for any trailing slashes in the URL: 'http://localhost:8080/'

@@ -2,21 +2,11 @@
 
     <head>
         <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
-        <script >
-
-            this.alfrescoJsApi = new AlfrescoApi({ provider:'ECM', hostEcm: 'http://localhost:8080/' });
-
-            this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
-                alert('API called successfully to login into Alfresco Content Services.');
-            }, function (error) {
-                console.error(error);
-            });
-
-        </script>
+        <script src="login.js"></script>
     </head>
 
     <body>
-        <h1>Hello World!</h1>
+        <h1>ACS Login test 2!</h1>
     </body>
 
 </html>
