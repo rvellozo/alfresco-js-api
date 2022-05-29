@@ -1,12 +1,60 @@
 <html>
 
-    <head>
-        <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
-        <script src="login.js"></script>
-      </head>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="node_modules/alfresco-js-api/dist/alfresco-js-api.js"></script>
+    <script>
+        var ticket;
+        function login() {
+            this.alfrescoJsApi = new AlfrescoApi({ provider: 'ECM', hostEcm: 'http://localhost:8080' });
+            this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
+                document.getElementById("demo").innerHTML = data;
+                ticket=data;
+                
+            }, function (error) {
+                console.error(error);
+            });
+          
+        }
+        function externalUsers() {
+            this.alfrescoJsApi.loginTicket(this.ticket).then(function (data) {
 
-    <body>
-        <h1>ACS Login test!</h1>
-    </body>
+                this.alfrescoJsApi.core.childAssociationsApi.getNodeChildren('-root-', {}).then(
+
+                    function (data) {
+
+                        var divElement = document.getElementById("result");
+
+                        for (var i = 0; i < data.list.entries.length; i++) {
+
+                            console.log(data.list.entries[i]);
+
+                            var textElement = document.createTextNode(
+                                data.list.entries[i].entry.name +
+                                " (" +
+                                data.list.entries[i].entry.id +
+                                ")"
+                            );
+                            var paragraphElement = document.createElement("p");
+                            paragraphElement.appendChild(textElement);
+                            divElement.appendChild(paragraphElement);
+                        }
+                    },
+                    function (error) { console.error(error); });
+
+            }, function (error) {
+                console.error(error);
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="login()">ACS Login</button>
+    <p id="demo"></p>
+    <button onclick="externalUsers()">External Users</button>
+    <div id='result'></div>
+</body>
 
 </html>
