@@ -8,8 +8,18 @@
         function login() {
             this.alfrescoJsApi = new AlfrescoApi({ provider: 'ECM', hostEcm: 'http://localhost:8080' });
             this.alfrescoJsApi.login('admin', 'admin').then(function (data) {
-                document.getElementById("demo").innerHTML = data;
+                document.getElementById("ticket").innerHTML = data;
                 ticket=data;
+                
+            }, function (error) {
+                console.error(error);
+            });
+          
+        }
+        function logout() {
+            this.alfrescoJsApi = new AlfrescoApi({ provider: 'ECM', hostEcm: 'http://localhost:8080' });
+            this.alfrescoJsApi.logout().then(function (data) {
+                document.getElementById("demo").innerHTML = data;
                 
             }, function (error) {
                 console.error(error);
@@ -52,6 +62,8 @@
 
 <body>
     <button onclick="login()">ACS Login</button>
+    <p id="ticket"></p>
+    <button onclick="logout()">ACS Logout</button>
     <p id="demo"></p>
     <button onclick="externalUsers()">External Users</button>
     <div id='result'></div>
